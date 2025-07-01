@@ -1,5 +1,6 @@
 {
   "name": "yvp-javascript-sdk",
+  "type": "module",
   "version": "1.0.0",
   "description": "YouVersion Platform JavaScript SDK",
   "main": "dist/sdk.js",
