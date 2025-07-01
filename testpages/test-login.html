@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login test</title>
-  <script type="module" src="https://api-dev.youversion.com/bible-text.js"></script>
-  <script type="module" src="./login.js"></script>
+  <!-- <script type="module" src="https://api-dev.youversion.com/sdk.js"></script> -->
+  <script type="module" src="../src/index.js"></script>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -62,22 +62,44 @@
     </div>
   </div>
 
-  <script>
+  <script type="module">
+    import { userInfo } from '/src/auth.js';
+
+    /**
+     * Clears the user-data div, fetches user info, and displays firstName and avatar.
+     * @param {Object} authData
+     */
+    async function handleUserAuthDisplay(authData) {
+      document.body.classList.add('authenticated');
+      const userDataDiv = document.getElementById('user-data');
+      userDataDiv.innerHTML = '';
+      try {
+        const token = authData.lat || authData.access_token;
+        const info = await userInfo(token);
+        let avatarImg = '';
+        if (info.avatarUrl) {
+          avatarImg = `<img src="${info.avatarUrl}" alt="Avatar" style="width:40px;height:40px;border-radius:50%;margin-bottom:10px;" />`;
+        }
+        userDataDiv.innerHTML = `
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            ${avatarImg}
+            <div style="font-size:1.2em;font-weight:bold;">Welcome, ${info.firstName}</div>
+          </div>
+        `;
+      } catch (e) {
+        userDataDiv.innerHTML = `<div style="color:red;">Failed to load user info: ${e.message}</div>`;
+      }
+    }
+
     // Handle successful login
     window.onYouVersionAuthLoad = function(authData) {
-      document.body.classList.add('authenticated');
-      document.getElementById('user-data').innerHTML = `
-        <pre>${JSON.stringify(authData, null, 2)}</pre>
-      `;
-    };
+      handleUserAuthDisplay(authData);
+    },
 
     // Handle successful auth callback
     window.onYouVersionAuthComplete = function(authData) {
-      document.body.classList.add('authenticated');
-      document.getElementById('user-data').innerHTML = `
-        <pre>${JSON.stringify(authData, null, 2)}</pre>
-      `;
-    };
+      handleUserAuthDisplay(authData);
+    },
 
     // Handle logout
     window.onYouVersionLogout = function() {
@@ -95,8 +117,9 @@
       }
 
       // Check initial auth state
-      if (YouVersionLogin.isAuthenticated()) {
-        const authData = YouVersionLogin.getAuthData();
+      const Login = window.YouVersionPlatform && window.YouVersionPlatform.Login;
+      if (Login && Login.isAuthenticated()) {
+        const authData = Login.getAuthData();
         if (authData) {
           window.onYouVersionAuthLoad(authData);
         }

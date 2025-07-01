@@ -1,7 +1,8 @@
 // Import all components
 import { BibleText } from './bible-text.js';
 import { VotdText } from './votd-text.js';
-import { YouVersionLogin, YouVersionLoginButton } from './login.js';
+import { YouVersionLogin } from './login.js';
+import { YouVersionLoginButton } from './login-button.js';
 
 // Register all custom elements
 if (!customElements.get('bible-text')) {
