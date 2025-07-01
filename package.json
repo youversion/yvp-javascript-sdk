@@ -1,0 +1,21 @@
+{
+  "name": "yvp-javascript-sdk",
+  "version": "1.0.0",
+  "description": "YouVersion Platform JavaScript SDK",
+  "main": "dist/sdk.js",
+  "module": "dist/sdk.esm.js",
+  "files": ["dist"],
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["youversion", "bible", "sdk", "web-components"],
+  "author": "YouVersion",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "rollup": "^4.0.0",
+    "@rollup/plugin-terser": "^0.4.4"
+  }
+}

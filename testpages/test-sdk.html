@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouVersion Platform SDK Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .component {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        h1, h2 {
+            color: #2c7d4d;
+        }
+    </style>
+</head>
+<body data-youversionplatformkey='IiotL64yrkUgWkMorSy6srHFVrO17YoiyCSnpY3cRprKKk6R'>
+    <h1>YouVersion Platform SDK Test</h1>
+    
+    <div class="component">
+        <h2>Bible Text Component</h2>
+        <bible-text usfm="JHN.3.16" version="111"></bible-text>
+    </div>
+    
+    <div class="component">
+        <h2>Verse of the Day</h2>
+        <votd-text version="111"></votd-text>
+    </div>
+    
+    <div class="component">
+        <h2>Login Button</h2>
+        <p>Click the button below to test the login functionality:</p>
+        <youversion-login-button></youversion-login-button>
+    </div>
+
+    <script>
+        window.onYouVersionAuthComplete = function(authData) {
+            console.log('Login successful!', authData);
+            alert('Login successful! Check the console for details.');
+        };
+        
+        window.onYouVersionAuthLoad = function(authData) {
+            console.log('Auth data loaded:', authData);
+        };
+        
+        window.onYouVersionLogout = function() {
+            console.log('User logged out');
+            alert('You have been logged out.');
+        };
+    </script>
+    
+    <script src="dist/sdk.js"></script>
+</body>
+</html>

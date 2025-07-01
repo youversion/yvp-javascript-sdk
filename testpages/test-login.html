@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login test</title>
+  <script type="module" src="https://api-dev.youversion.com/bible-text.js"></script>
+  <script type="module" src="./login.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .container {
+      text-align: center;
+      margin-top: 50px;
+    }
+    #auth-status {
+      margin: 20px 0;
+      padding: 15px;
+      border-radius: 4px;
+      display: none;
+    }
+    .authenticated #login-button {
+      display: none;
+    }
+    .authenticated #auth-status {
+      display: block;
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body data-youversionplatformkey='y4tcWlXZh7xYSgghiPGMpEpejRcNEDYMGqBuEXRG1Tj8Wgmo'>
+  <div class="container">
+    <h1>YouVersion Login Test</h1>
+    
+    <div id="login-button">
+      <p>Please sign in to continue:</p>
+      <youversion-login-button></youversion-login-button>
+    </div>
+    
+    <div id="auth-status">
+      <h2>✅ Successfully Authenticated</h2>
+      <p>Welcome! You are now logged in.</p>
+      <div id="user-data"></div>
+      <button id="logout-button">Log Out</button>
+    </div>
+  </div>
+
+  <script>
+    // Handle successful login
+    window.onYouVersionAuthLoad = function(authData) {
+      document.body.classList.add('authenticated');
+      document.getElementById('user-data').innerHTML = `
+        <pre>${JSON.stringify(authData, null, 2)}</pre>
+      `;
+    };
+
+    // Handle successful auth callback
+    window.onYouVersionAuthComplete = function(authData) {
+      document.body.classList.add('authenticated');
+      document.getElementById('user-data').innerHTML = `
+        <pre>${JSON.stringify(authData, null, 2)}</pre>
+      `;
+    };
+
+    // Handle logout
+    window.onYouVersionLogout = function() {
+      document.body.classList.remove('authenticated');
+      document.getElementById('user-data').innerHTML = '';
+    };
+
+    // Set up logout button
+    document.addEventListener('DOMContentLoaded', () => {
+      const logoutButton = document.getElementById('logout-button');
+      if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+          YouVersionLogin.logout();
+        });
+      }
+
+      // Check initial auth state
+      if (YouVersionLogin.isAuthenticated()) {
+        const authData = YouVersionLogin.getAuthData();
+        if (authData) {
+          window.onYouVersionAuthLoad(authData);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
