@@ -1,4 +1,4 @@
-export class YouVersionLoginButton extends HTMLElement {
+export default class YouVersionLoginButton extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -67,5 +67,3 @@ export class YouVersionLoginButton extends HTMLElement {
     return [];
   }
 }
-
-export default YouVersionLoginButton;

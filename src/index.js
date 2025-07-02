@@ -1,10 +1,10 @@
-// Import all components
-import { BibleText } from './bible-text.js';
-import { VotdText } from './votd-text.js';
-import { YouVersionLogin } from './login.js';
-import { YouVersionLoginButton } from './login-button.js';
+import BibleText from './bible-text.js';
+import VotdText from './votd-text.js';
+import YouVersionLogin from './login.js';
+import YouVersionLoginButton from './login-button.js';
+import BibleReference from './bible-reference.js';
+import BibleVersion from './bible-version.js';
 
-// Register all custom elements
 if (!customElements.get('bible-text')) {
   customElements.define('bible-text', BibleText);
 }
@@ -17,11 +17,20 @@ if (!customElements.get('youversion-login-button')) {
   customElements.define('youversion-login-button', YouVersionLoginButton);
 }
 
-// Set up the global YouVersionPlatform object
 const YouVersionPlatform = window.YouVersionPlatform || {};
 YouVersionPlatform.Login = YouVersionLogin;
+YouVersionPlatform.BibleReference = BibleReference;
+YouVersionPlatform.BibleVersion = BibleVersion;
 
 // Make it available globally
 window.YouVersionPlatform = YouVersionPlatform;
 
-export default YouVersionPlatform;
+export {
+  BibleReference,
+  BibleVersion,
+  BibleText,
+  VotdText,
+  YouVersionLogin,
+  YouVersionLoginButton,
+  YouVersionPlatform as default
+};
