@@ -1,5 +1,5 @@
 export default class BibleReference {
-  constructor({ versionId, bookUSFM, chapterStart = 0, verseStart = 0, chapterEnd = 0, verseEnd = 0 }) {
+  constructor(versionId, bookUSFM, chapterStart = 0, verseStart = 0, chapterEnd = 0, verseEnd = 0) {
     this.versionId = versionId;
     this.bookUSFM = bookUSFM;
     this.chapterStart = chapterStart;
