@@ -1,11 +1,6 @@
 import YouVersionLoginButton from './login-button.js';
 
-// Register the custom element if not already defined
-if (!customElements.get('youversion-login-button')) {
-  customElements.define('youversion-login-button', YouVersionLoginButton);
-}
-
-export class YouVersionLogin {
+export default class YouVersionLogin {
   static BASE_URL = 'https://api-dev.youversion.com';
 
   static constructAuthUrl(
@@ -26,6 +21,7 @@ export class YouVersionLogin {
   }
 
   static initialize() {
+    // TODO: can we remove this? Is it necessary?
     if (!customElements.get('youversion-login-button')) {
       customElements.define('youversion-login-button', YouVersionLoginButton);
     }
@@ -88,23 +84,11 @@ export class YouVersionLogin {
   }
 }
 
-// Add Login to the YouVersionPlatform namespace, creating if necessary
-window.YouVersionPlatform = window.YouVersionPlatform || {};
-window.YouVersionPlatform.Login = YouVersionLogin;
-window.YouVersionPlatform.LoginButton = YouVersionLoginButton;
-
 // Initialize when the script is loaded
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    window.YouVersionPlatform = window.YouVersionPlatform || {};
-    window.YouVersionPlatform.Login = YouVersionLogin;
     YouVersionLogin.initialize();
   });
 } else {
-  window.YouVersionPlatform = window.YouVersionPlatform || {};
-  window.YouVersionPlatform.Login = YouVersionLogin;
   YouVersionLogin.initialize();
 }
-
-// Export the YouVersionPlatform object
-export default window.YouVersionPlatform || {};

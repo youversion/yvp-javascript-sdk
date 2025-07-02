@@ -25,6 +25,8 @@ gsutil cp ./dist/sdk.js gs://yvplatform-dev-public-files/sdk.js
 echo "Verifying upload..."
 gsutil ls -l gs://yvplatform-dev-public-files/sdk.js
 
-echo "\nDeployment completed successfully!"
+echo
+echo "Deployment completed successfully!"
 echo "SDK is available at: https://storage.googleapis.com/yvplatform-dev-public-files/sdk.js"
-echo "And therefore at: https://api-dev.youversion.com/sdk.js"
+echo "And presumably at: https://api-dev.youversion.com/sdk.js"
+echo

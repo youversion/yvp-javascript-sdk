@@ -7,8 +7,6 @@ function apiKey() {
   return document.body?.dataset.youversionplatformkey;
 }
 
-// No proxy agent needed in browser environment
-
 export default class BibleVersionAPIs {
   static async metadata(versionId) {
     const key = apiKey();

@@ -1,4 +1,4 @@
-export class VotdText extends HTMLElement {
+export default class VotdText extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });

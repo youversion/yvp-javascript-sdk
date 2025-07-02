@@ -1,4 +1,4 @@
-export class BibleText extends HTMLElement {
+export default class BibleText extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
