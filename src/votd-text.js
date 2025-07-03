@@ -11,7 +11,7 @@ export default class VotdText extends HTMLElement {
 
   async loadContent() {
     const host = "https://api-dev.youversion.com";
-    const version = this.getAttribute('version') || '111';
+    const version = this.getAttribute('version');
     const styles = `<style>
       .votd-text { display: block; }
       .votd-text header { display: flex; justify-content: space-between; margin-bottom: 0.5em; }
@@ -23,13 +23,16 @@ export default class VotdText extends HTMLElement {
 
     let content = "";
     try {
-      const apiKey = window.youversionplatformkey || document.body?.dataset.youversionplatformkey;
-      if (!version || !apiKey) {
+      const appId = document.body?.dataset.youversionPlatformAppId;
+      if (!appId) {
+        throw new Error('The YouVersion Platform App ID is required.');
+      }
+      if (!version) {
         content = `<div class="error">Unable to display verse of the day: missing attributes.</div>`;
       } else {
         const url = `${host}/votd/today?version=${version}`;
         const resp = await fetch(url, {
-          headers: { 'X-App-ID': apiKey }
+          headers: { 'X-App-ID': appId }
         });
         if (!resp.ok) {
           content = `<div class="error">Unable to load verse of the day.</div>`;

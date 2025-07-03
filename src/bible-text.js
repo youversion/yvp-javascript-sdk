@@ -33,13 +33,16 @@ export default class BibleText extends HTMLElement {
 
     var content = "";
     try {
-      const apiKey = window.youversionplatformkey || document.body?.dataset.youversionplatformkey;
-      if (!usfm || !version || !apiKey) {
+      const appId = document.body?.dataset.youversionPlatformAppId;
+      if (!appId) {
+        throw new Error('The YouVersion Platform App ID is required.');
+      }
+      if (!usfm || !version || !appId) {
         content = `<div class="error">Unable to display verse: missing attributes.</div>`;
       } else {
         const url = `${host}/bible/passage?format=json&version=${version}&usfm=${usfm}`;
         const resp = await fetch(url, {
-          headers: { 'X-App-ID': apiKey }
+          headers: { 'X-App-ID': appId }
         });
         if (!resp.ok) {
           content = `<div class="error">Unable to load verse.</div>`;

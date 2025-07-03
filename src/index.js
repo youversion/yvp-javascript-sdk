@@ -4,6 +4,7 @@ import YouVersionLogin from './login.js';
 import YouVersionLoginButton from './login-button.js';
 import BibleReference from './bible-reference.js';
 import BibleVersion from './bible-version.js';
+import userInfo from './auth.js';
 
 if (!customElements.get('bible-text')) {
   customElements.define('bible-text', BibleText);
@@ -21,6 +22,7 @@ const YouVersionPlatform = window.YouVersionPlatform || {};
 YouVersionPlatform.Login = YouVersionLogin;
 YouVersionPlatform.BibleReference = BibleReference;
 YouVersionPlatform.BibleVersion = BibleVersion;
+YouVersionPlatform.userInfo = userInfo;
 
 // Make it available globally
 window.YouVersionPlatform = YouVersionPlatform;
@@ -29,6 +31,7 @@ export {
   BibleReference,
   BibleVersion,
   BibleText,
+  userInfo,
   VotdText,
   YouVersionLogin,
   YouVersionLoginButton,

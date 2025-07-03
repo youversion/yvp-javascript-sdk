@@ -4,13 +4,13 @@ export default class YouVersionLogin {
   static BASE_URL = 'https://api-dev.youversion.com';
 
   static constructAuthUrl(
-    appKey,
+    appId,
     requiredPermissions = [],
     optionalPermissions = []
   ) {
     const url = new URL('/auth/login', this.BASE_URL);
     const params = new URLSearchParams({
-      app_id: appKey,
+      app_id: appId,
       language: navigator.language.split('-')[0] || 'en',
       required_perms: requiredPermissions.join(','),
       opt_perms: optionalPermissions.join(',')

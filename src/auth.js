@@ -31,16 +31,16 @@ function computeAvatarUrl(avatarUrlFormat) {
  * @param {string} accessToken
  * @returns {Promise<YouVersionUserInfo>}
  */
-export async function userInfo(accessToken) {
-  const apiKey = window.youversionplatformkey || document.body?.dataset.youversionplatformkey;
-  if (!apiKey) {
-    throw new Error('The YouVersion Platform app key is required.');
+export default async function userInfo(accessToken) {
+  const appId = document.body?.dataset.youversionPlatformAppId;
+  if (!appId) {
+    throw new Error('The YouVersion Platform App ID is required.');
   }
   const url = `https://api-dev.youversion.com/auth/me?lat=${accessToken}`;  // TODO remove the lat param once Apigee has been updated.
   const response = await fetch(url, {
     headers: {
       'lat': accessToken,
-      'X-App-ID': apiKey
+      'X-App-ID': appId
     }
   });
   if (!response.ok) {
