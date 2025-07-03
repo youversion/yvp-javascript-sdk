@@ -48,15 +48,15 @@ export default class YouVersionLoginButton extends HTMLElement {
   }
 
   handleLogin = () => {
-    const appKey = document.body.dataset.youversionplatformkey;
-    if (!appKey) {
-      console.error('YouVersion Platform Key not found. Add data-youversionplatformkey to the body tag.');
+    const appId = document.body?.dataset.youversionPlatformAppId;
+    if (!appId) {
+      console.error('YouVersion Platform App ID not found. Add data-youversion-platform-app-id to the body tag.');
       return;
     }
     
     // The YouVersionLogin class must be available globally
     const url = window.YouVersionPlatform?.Login?.constructAuthUrl
-      ? window.YouVersionPlatform.Login.constructAuthUrl(appKey)
+      ? window.YouVersionPlatform.Login.constructAuthUrl(appId)
       : null;
     if (url) {
       window.location.href = url;

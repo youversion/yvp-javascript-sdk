@@ -24,26 +24,19 @@ npm install @youversion/yvp-javascript-sdk
 
 ## Usage
 
-### Add App key
+### Add App ID
 
-Get your App key from your friendly neighborhood YouVersion Platform representative.
+Get your App ID from your friendly neighborhood YouVersion Platform representative.
 Later, of course, we will have a public website for this.
 
-The App key is not a secret and can be exposed in your code.
+The App ID is not a secret and can be exposed in your code.
 
-Add the App key to your page either on the body element or in a script tag:
-
-```html
-<body data-youversionplatformkey='YOUR_APP_KEY'>
-```
-
-Or:
+Add the App ID to your page either on the body element or in a script tag:
 
 ```html
-<script>
-  window.youversionplatformkey = 'YOUR_APP_KEY';
-</script>
+<body data-youversion-platform-app-id='YOUR_APP_ID'>
 ```
+
 
 ### Display a Bible verse
 
