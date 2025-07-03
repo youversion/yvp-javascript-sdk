@@ -39,7 +39,7 @@ export default class BibleText extends HTMLElement {
       } else {
         const url = `${host}/bible/passage?format=json&version=${version}&usfm=${usfm}`;
         const resp = await fetch(url, {
-          headers: { 'apikey': apiKey }
+          headers: { 'X-App-ID': apiKey }
         });
         if (!resp.ok) {
           content = `<div class="error">Unable to load verse.</div>`;

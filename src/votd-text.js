@@ -29,7 +29,7 @@ export default class VotdText extends HTMLElement {
       } else {
         const url = `${host}/votd/today?version=${version}`;
         const resp = await fetch(url, {
-          headers: { 'apikey': apiKey }
+          headers: { 'X-App-ID': apiKey }
         });
         if (!resp.ok) {
           content = `<div class="error">Unable to load verse of the day.</div>`;
