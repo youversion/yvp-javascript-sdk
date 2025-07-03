@@ -40,7 +40,7 @@ export async function userInfo(accessToken) {
   const response = await fetch(url, {
     headers: {
       'lat': accessToken,
-      'apikey': apiKey
+      'X-App-ID': apiKey
     }
   });
   if (!response.ok) {

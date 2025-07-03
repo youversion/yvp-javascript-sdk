@@ -13,7 +13,7 @@ export default class BibleVersionAPIs {
     if (!key) throw new Error('YouVersion Platform app key required');
     const url = URLBuilder.versionURL(versionId);
     const response = await fetch(url, {
-      headers: { apikey: key }
+      headers: { X-App-ID: key }
     });
     if (!response.ok) {
       if (response.status === 401) throw new Error('not permitted');
@@ -29,7 +29,7 @@ export default class BibleVersionAPIs {
     if (!languageTag || languageTag.length !== 3) return [];
     const url = URLBuilder.versionsURL(languageTag);
     const response = await fetch(url, {
-      headers: { apikey: key }
+      headers: { X-App-ID: key }
     });
     if (!response.ok) {
       if (response.status === 401) throw new Error('not permitted');
