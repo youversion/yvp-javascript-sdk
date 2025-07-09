@@ -45,12 +45,12 @@ export default class VotdText extends HTMLElement {
           const body = `<div class="body">${data.text.replace(/\n/g, '<br>')}</div>`;
           //const copyright = `<div class="copyright">${data.copyright}</div>`;
           content = header + body;
+          this.setAttribute('usfm', data.usfm);
         }
       }
     } catch (err) {
       content = `<div class="error">Unable to load verse of the day: ${err.message}</div>`;
     }
-    this.setAttribute('usfm', data.usfm);
     this.shadowRoot.innerHTML = `${styles} <div class="votd-text">${content}</div>`;
   }
 
