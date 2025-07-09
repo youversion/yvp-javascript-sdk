@@ -45,6 +45,7 @@ export default class VotdText extends HTMLElement {
           const body = `<div class="body">${data.text.replace(/\n/g, '<br>')}</div>`;
           //const copyright = `<div class="copyright">${data.copyright}</div>`;
           content = header + body;
+          this.setAttribute('usfm', data.usfm);
         }
       }
     } catch (err) {
